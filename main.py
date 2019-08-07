@@ -148,6 +148,7 @@ while True:
             STATUS = "Virtualizing " + displayName # Set status
             vmcount = None # Only 1 VM, so set vmcount to None
             HYPERVISOR = "VMware"
+            smallimage = "vmworkstation" # Set small image
     if "hyper-v" in hypervisors:
         hyperv.updateRunningVMs()
         if hyperv.isFound() == False:
@@ -172,6 +173,7 @@ while True:
             STATUS = "Virtualizing " + displayName # Set status
             vmcount = None # Only 1 VM, so set vmcount to none
             HYPERVISOR = "Hyper-V"
+            smallimage = "hyperv" # Set small image
     if STATUS != LASTSTATUS and STATUS != None: # To prevent spamming Discord, only update when something changes
         print("Rich presence updated locally; new rich presence is: " + STATUS + " (using " + HYPERVISOR + ")") # Report of status change, before ratelimit
         if epoch_time == 0: # Only change the time if we stopped running VMs before
@@ -183,5 +185,5 @@ while True:
         else:
             largetext = "Check out vm-rpc by DhinakG on GitHub!"
         # The big RPC update
-        RPC.update(state=STATUS,details="Running " + HYPERVISOR,large_image=largeimage,large_text=largetext,start=epoch_time,party_size=vmcount)
+        RPC.update(state=STATUS,details="Running " + HYPERVISOR,large_image=largeimage,small_image=smallimage,large_text=largetext,start=epoch_time,party_size=vmcount)
         LASTSTATUS = STATUS # Update last status to last status sent
